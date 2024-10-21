@@ -1,11 +1,30 @@
-<html>
-    <body>
-        <form>
-            <input type="text" id="Nombre" placeholder="Nombre"></input>
-            <input type="text" id="Apellidos" placeholder="Apellidos"></input>
-            <input type="email" id="Correo" placeholder="Correo electrónico"></input>
-            <input type="text"  required minlength="9" required maxlength="9" id="DNI" placeholder="DNI"></input>
-            <input onclick="validate()" type="submit" value="Enviar">
-        </form>
-    </body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Usuario</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Si tienes un archivo CSS -->
+    <script src="Ejercicio3.js" defer></script> <!-- Enlazamos el archivo de validación -->
+</head>
+<body>
+    <h1>Formulario de Registro</h1>
+    <form id="userForm">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre"><br><br>
+
+        <label for="apellidos">Apellidos:</label>
+        <input type="text" id="apellidos" name="apellidos"><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br><br>
+
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni"><br><br>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <div id="errorMessages" style="color: red;"></div>
+</body>
 </html>

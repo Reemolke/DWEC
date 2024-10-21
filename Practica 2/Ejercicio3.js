@@ -1,14 +1,48 @@
+document.getElementById('userForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evitar el envío del formulario si hay errores
 
-    const form= document.getElementsByTagName("form");
-    let name = document.getElementById('Nombre').value;
-    let surname = document.getElementById('Apellidos').value;
-    let email = document.getElementById('Correo').value;
-    let Dni = document.getElement('Dni').value;
-    
-    form.addEventListener('submit',(event) => {
-        if(!form.checkValidity()){
-            event.preventDefault();
-            alert("Por favor, rellena todos los campos correctamente");
+    const dni = document.getElementById('dni').value.trim();
+    const email = document.getElementById('email').value.trim();
+    let errores = [];
+
+    // Validación del DNI
+    if (!dni) {
+        errores.push("Completa el campo DNI."); // El campo DNI es obligatorio
+    } else if (!/^\d{8}$/.test(dni.slice(0, 8))) {
+        errores.push("Teclea un DNI (sin letras, solo números)."); // Formato incorrecto: No son 8 dígitos
+    } else {
+        // Validar la letra del DNI
+        const numeroDNI = dni.slice(0, 8); // Obtener los 8 primeros caracteres (números)
+        const letraDNI = dni.slice(8).toUpperCase(); // Obtener la letra (último carácter)
+        const letrasValidas = "TRWAGMYFPDXBNJZSQVHLCKE";
+        const indiceLetra = parseInt(numeroDNI) % 23; // Calcular el índice para la letra
+        const letraCorrecta = letrasValidas[indiceLetra]; // Letra calculada
+
+        if (letraDNI !== letraCorrecta) {
+            errores.push("La letra del NIF es incorrecta."); // Error si la letra no coincide
         }
-    });
-    
+    }
+
+    // Validación del email (formato válido y existencia de dominio)
+    if (!email) {
+        errores.push("El campo email es obligatorio.");
+    } else {
+            const email = "ejemplo@dominio.com";
+            const emailPattern = /^[^ ]+@[^ ]+\.[a-z];{2,3}$/;
+
+            if (emailPattern.test(email)) {
+            console.log("El correo electrónico es válido");
+            } else {
+            console.log("El correo electrónico no es válido");
+        }
+    }
+
+    // Mostrar errores o enviar el formulario
+    const errorMessages = document.getElementById('errorMessages');
+    if (errores.length > 0) {
+        errorMessages.innerHTML = errores.join('<br>'); // Mostrar mensajes de error
+    } else {
+        errorMessages.innerHTML = "Formulario enviado correctamente.";
+        // Aquí puedes enviar el formulario si no hay errores
+    }
+});
