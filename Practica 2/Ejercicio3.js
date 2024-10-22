@@ -7,23 +7,23 @@ document.getElementById('userForm').addEventListener('submit', function(event) {
 
     // Validación del DNI
     if (!dni) {
-        errores.push("Completa el campo DNI."); // El campo DNI es obligatorio
+        errores.push("Completa el campo DNI."); 
     } else if (!/^\d{8}$/.test(dni.slice(0, 8))) {
-        errores.push("Teclea un DNI (sin letras, solo números)."); // Formato incorrecto: No son 8 dígitos
+        errores.push("Teclea un DNI (sin letras, solo números)."); 
     } else {
         // Validar la letra del DNI
         const numeroDNI = dni.slice(0, 8); // Obtener los 8 primeros caracteres (números)
-        const letraDNI = dni.slice(8).toUpperCase(); // Obtener la letra (último carácter)
+        const letraDNI = dni.slice(8).toUpperCase();
         const letrasValidas = "TRWAGMYFPDXBNJZSQVHLCKE";
         const indiceLetra = parseInt(numeroDNI) % 23; // Calcular el índice para la letra
-        const letraCorrecta = letrasValidas[indiceLetra]; // Letra calculada
+        const letraCorrecta = letrasValidas[indiceLetra];
 
         if (letraDNI !== letraCorrecta) {
             errores.push("La letra del NIF es incorrecta."); // Error si la letra no coincide
         }
     }
 
-    // Validación del email (formato válido y existencia de dominio)
+    // Validación del email
     if (!email) {
         errores.push("El campo email es obligatorio.");
     } else {
@@ -40,9 +40,8 @@ document.getElementById('userForm').addEventListener('submit', function(event) {
     // Mostrar errores o enviar el formulario
     const errorMessages = document.getElementById('errorMessages');
     if (errores.length > 0) {
-        errorMessages.innerHTML = errores.join('<br>'); // Mostrar mensajes de error
+        errorMessages.innerHTML = errores.join('<br>');
     } else {
         errorMessages.innerHTML = "Formulario enviado correctamente.";
-        // Aquí puedes enviar el formulario si no hay errores
     }
 });
