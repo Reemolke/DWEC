@@ -1,4 +1,4 @@
-document.getElementById('userForm').addEventListener('submit', function(event) {
+document.getElementById('form').addEventListener('submit', function(event) {
     event.preventDefault(); // Evitar el envío del formulario si hay errores
 
     const dni = document.getElementById('dni').value.trim();
@@ -27,15 +27,14 @@ document.getElementById('userForm').addEventListener('submit', function(event) {
     if (!email) {
         errores.push("El campo email es obligatorio.");
     } else {
-            const email = "ejemplo@dominio.com";
-            const emailPattern = /^[^ ]+@[^ ]+\.[a-z];{2,3}$/;
-
-            if (emailPattern.test(email)) {
-            console.log("El correo electrónico es válido");
-            } else {
-            console.log("El correo electrónico no es válido");
+        const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    
+        if (emailPattern.test(email)) {
+        } else {
+            errores.push("El formato del correo electrónico no es válido.");
         }
     }
+    
 
     // Mostrar errores o enviar el formulario
     const errorMessages = document.getElementById('errorMessages');
