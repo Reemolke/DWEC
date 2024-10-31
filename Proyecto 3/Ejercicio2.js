@@ -7,10 +7,10 @@ const currentYear = new Date().getFullYear();
         option.textContent = year;
         select.appendChild(option);
     }
-    document.getElementById('form').addEventListener('submit', function(event) {
+    document.getElementsByTagName('form')[0].addEventListener('submit', function(event) {
         const nombre = document.getElementById('nombre');
-        const apellido1 = document.getElementById('apellido1');
-        const apellido2 = document.getElementById('apellido2');
+        const apellido1 = document.getElementById('apellido');
+        const apellido2 = document.getElementById('cognom2');
         const fecha = document.getElementById('fecha');
         const estudios = document.getElementById('estudios');
         const curso = document.getElementById('curso');
@@ -44,7 +44,13 @@ const currentYear = new Date().getFullYear();
         }
         
         if (errores.length > 0) {
-            alert(errores.join("\n"));
-            return;
+            const erroresUl = document.getElementById('errores');
+            errores.forEach((errores)=> {
+                const error = document.createElement('option');
+                error.value = item;
+                error.textContent = item;
+                erroresUl.appendChild(error);
+                
+            });
         }
     });
