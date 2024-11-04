@@ -17,5 +17,3 @@ class Alumno{
       document.write('</ul>');
     }
 }
-const alumno= new Alumno("Alumno", 0,0,0,0,0,0);
-alumno.mostrar();

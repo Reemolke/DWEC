@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimiento de Imagen</title>
+    <style>
+        body {
+            position: relative;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Evitar desplazamiento de la página */
+        }
+
+        #miImagen {
+            width: 50px; /* Tamaño del icono */
+            height: 50px; /* Tamaño del icono */
+            position: absolute;
+            cursor: pointer; /* Cambia el cursor al pasar sobre la imagen */
+            left: 0; /* Posición inicial en el eje X */
+            top: 0; /* Posición inicial en el eje Y */
+        }
+    </style>
+</head>
+<body>
+    <img id="miImagen" src="https://th.bing.com/th/id/OIP.G1RFiJPJkHcaHC8juR3eTAHaHW?rs=1&pid=ImgDetMain" alt="Icono" />
+    <script src="Ejercicio3.js"></script>
+</body>
+</html>

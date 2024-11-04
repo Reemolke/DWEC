@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html>
     <body>
-        <form>
+        <form id="form">
             <label for="nombre">Nombre: </label>
             <input type="text" id="nombre" name="nombre"><br>
             <label for="apellido">Apellido1: </label>
@@ -8,26 +9,34 @@
             <label for="cognom2">Apellido2: </label>
             <input type="text" id="cognom2" name="cognom2"><br>
             <label for="fecha">Fecha: </label>
-            <input type="date" id="fecha" name="fecha"><br>
+            <input type="text" id="fecha" name="fecha"><br>
             <label for="estudios">Estudios: </label>
             <select id="estudios" name="estudios">
-                    <option value="Doctorado">Doctorado</option>
-                    <option value="Libre">Libre</option>
-            </select>
+                <option></option>
+                <option value="Doctorado">Doctorado</option>
+                <option value="Libre">Libre</option>
+            </select><br>
             <label for="curso">Curso: </label>
-            <select id="curso" name="curso" id="curso">
-                
+            <select id="curso" name="curso">
+                <option></option>
             </select><br>
             <label for="telefono">Tel: </label>
             <input type="tel" id="telefono" name="telefono"><br>
             <button type="submit">Registrar</button>
         </form>
-        <div class="erroresDiv">
-            <ul id="errores">
-                
-            </ul>
+
+        <!-- Modal de errores -->
+        <div id="erroresDiv" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5);">
+            <div id="erroresClose" style="position: absolute; top: 10px; right: 10px; cursor: pointer; color: white; font-weight: bold;">
+                <p>X</p>
+            </div>
+            <div id="modal" style="background: white; color: black; padding: 20px; margin: 15% auto; width: 80%; max-width: 400px; text-align: center;">
+            </div>
         </div>
-        <script src="Ejercicio2.js"></script>
-        
+
+        <script src="Ejercicio2.js">
+            
+        </script>
+        <script src="Ejercicio1.js"></script>
     </body>
 </html>
