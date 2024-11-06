@@ -17,77 +17,84 @@ const erroresCerrar = document.getElementById('erroresClose');
 const modal = document.getElementById('modal');
 const estudios = document.getElementById('estudios');
 // Función de validación del nombre
-nombre.addEventListener('focusout',
-function() {
-  const pattern = /^[a-zA-Z]+$/; // Permitir solo letras
+function nombreCheck() {
+  const pattern = /^[a-zA-ZñÑ\s]+$/; // Permitir solo letras
   if (!nombre.value) {
     mostrarError("Rellene el nombre por favor.");
   } else if (!pattern.test(nombre.value)) {
     mostrarError("No se admiten caracteres especiales ni números");
   } else {
     ocultarError();
-    contador++;
+    return true;
   }
-});
-apellido1.addEventListener('focusout',
-    function() {
-      const pattern = /^[a-zA-Z]+$/; // Permitir solo letras
-      if (!apellido1.value) {
-        mostrarError("Rellene el apellido por favor.");
-      } else if (!pattern.test(apellido1.value)) {
-        mostrarError("No se admiten caracteres especiales ni números");
-      } else {
-        ocultarError();
-        contador++;
-      }
-    });
-
-apellido2.addEventListener('focusout',
-function() {
-  const pattern = /^[a-zA-Z]+$/; // Permitir solo letras
-  if (!pattern.test(apellido2.value) && apellido2.value) {
+  return false;
+}
+nombre.addEventListener('focusout',nombreCheck);
+function apellido1Check() {
+  const pattern = /^[a-zA-ZñÑ\s]+$/; // Permitir solo letras
+  if (!apellido1.value) {
+    mostrarError("Rellene el apellido por favor.");
+  } else if (!pattern.test(apellido1.value)) {
     mostrarError("No se admiten caracteres especiales ni números");
   } else {
     ocultarError();
-    contador++;
+    return true;
   }
-});
-fecha.addEventListener('focusout',
-    function() {
-      const patternDate = /^\d{2}\/\d{2}\/\d{4}$/; // Permitir dd / mm / yyyy
-      const date =new Date(fecha.value);
-      if (patternDate.test()) {
-        mostrarError("No se admiten caracteres especiales ni letras");
-      } else if (new Date().getFullYear() -date.getFullYear() < 18) {
-        mostrarError("Eres menor");
-      } else if(fecha.value == ""){
-        mostrarError("Rellene la fecha por favor.");
-      }else{
-        ocultarError();
-        contador++;
-      }
-    });
-estudios.addEventListener('focusout',
-function() {
-  if (estudios.value != "Doctorado" && estudios != "Libre") {
+  return false;
+}
+apellido1.addEventListener('focusout',apellido1Check);
+
+function apellido2Check() {
+  const pattern = /^[a-zA-ZñÑ\s]+$/; // Permitir solo letras
+  if (!pattern.test(apellido2.value) && apellido2.value) {
+    mostrarError("No se admiten caracteres especiales ni números");
+    return false;
+  } else {
+    ocultarError();
+    return true;
+  }
+  
+}
+apellido2.addEventListener('focusout',apellido2Check);
+function fechaCheck() {
+  const patternDate = /^\d{2}\/\d{2}\/\d{4}$/; // Permitir dd / mm / yyyy
+  const date = fecha.value.trim();
+  if (!patternDate.test(date)) {
+    mostrarError("La fecha no esta en el formato correcto. dd// mm / yyyy");
+  } else if (new Date().getFullYear() -new Date(date).getFullYear() < 18) {
+    mostrarError("Eres menor");
+  } else if(fecha.value == ""){
+    mostrarError("Rellene la fecha por favor.");
+  }else{
+    ocultarError();
+    return true;
+  }
+  return false;
+}
+fecha.addEventListener('focusout',fechaCheck);
+function estudiosCheck() {
+  if (estudios.value != "Doctorado" && estudios.value != "Libre") {
     mostrarError("Rellene sus estudios");
   }else {
     ocultarError();
-    contador++;
+    return true;
   }
-});
-select.addEventListener('focusout',
-function() {
-  const pattern = /^[a-zA-Z]+$/; // Permitir solo letras
+  return false;
+}
+estudios.addEventListener('focusout',estudiosCheck);
+function cursoCheck() {
+  const pattern = /^[a-zA-ZñÑ\s]+$/; // Permitir solo letras
   if (select.value < 2000 || select.value > new Date().getFullYear()) {
     mostrarError("Esa fecha es incorrecta");
   } else {
     ocultarError();
-    contador++;
+    return true;
   }
-});
-telefono.addEventListener('focusout',
-function() {
+  return false;
+}
+select.addEventListener('focusout',cursoCheck);
+telefono.addEventListener('focusout',telefonoCheck);
+function telefonoCheck() {
   const pattern = /^\d{9}$/; // Permitir solo letras
   if (!telefono.value || telefono.value.length < 9) {
     mostrarError("Rellene el telefono por favor.");
@@ -95,9 +102,10 @@ function() {
     mostrarError("No se admiten caracteres especiales ni letras");
   } else {
     ocultarError();
-    contador++;
+    return true;
   }
-});
+  return false;
+}
 
 // Función para mostrar el modal con el mensaje de error
 function mostrarError(mensaje) {
@@ -109,7 +117,7 @@ function mostrarError(mensaje) {
         error.style.display = "none";
    }
    function mostrarResultado(mensaje) {
-    modal.innerHTML = '<ul>'+mensaje+'</ul>';
+    modal.innerHTML = mensaje;
         error.style.display = "block";
     }
         // Función para ocultar el modal de errores
@@ -124,11 +132,12 @@ function mostrarError(mensaje) {
   });
 document.getElementById('form').addEventListener('submit',function(event){
     event.preventDefault();
-    if(!nombre.value || !apellido1.value || !fecha.value || !estudios.value || !select.value || !telefono.value){
-        mostrarError("Te has dejado campos sin rellenar!");
+    if(!nombreCheck() || !apellido1Check()  || !apellido2Check() || !fechaCheck() || !estudiosCheck() || !cursoCheck() || !telefonoCheck()){
+        
     }else{
         const alumno = new Alumno(nombre.value,apellido1.value,apellido2.value,fecha.value,estudios.value,select.value,telefono.value);
-        mostrarResultado(alumno.mostrar());
+        const cadena = alumno.mostrar(); 
+        mostrarResultado(cadena);
     }
     
 })

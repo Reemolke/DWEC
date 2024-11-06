@@ -10,10 +10,10 @@ class Alumno{
     }
     mostrar(){
       const array= ["nombre","apellido1","apellido2","fechaNacimiento","estudios","curso","telefono"];
-      document.write('<ul>');
+      let cadena="";
         array.forEach((item)=>{
-            document.write('<li>'+this[item]+'</li>');
+            cadena+=('<p>'+item+": "+this[item]+'</p><br>');
         });
-      document.write('</ul>');
+      return cadena;
     }
 }
